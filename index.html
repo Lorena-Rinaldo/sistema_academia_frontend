@@ -20,12 +20,68 @@
         </div>
 
     </header>
+
+    <main class="flex flex-col items-center justify-center p-6 bg-zinc-50">
+  
+        <div class="w-full max-w-lg">
+            <label for="cpf-input" class="block text-zinc-500 text-sm font-bold mb-3 uppercase tracking-widest">
+            CPF (Cadastro de Pessoa Física)
+            </label>
+            
+            <div class="relative group">
+            <input 
+                type="text" 
+                id="cpf-input" 
+                [cite_start]placeholder="DIGITE SEU CPF..."
+                readonly
+                class="w-full h-24 text-3xl font-bold tracking-[0.25em] text-zinc-900 bg-white border-4 border-zinc-900 rounded-3xl px-8 shadow-lg focus:outline-none placeholder:text-zinc-300 placeholder:italic placeholder:tracking-normal transition-all"
+            >
+            
+            <div class="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
+                <svg class="w-8 h-8 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                </svg>
+            </div>
+            </div>
+
+            <p class="mt-4 text-center text-zinc-400 text-lg italic">
+            Toque nos números abaixo para iniciar
+            </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 w-full max-w-sm px-4">
+    
+            <button onclick="digitar('0')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">0</button>
+            <button onclick="digitar('1')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">1</button>
+            <button onclick="digitar('2')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">2</button>
+            
+            <button onclick="digitar('3')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">3</button>
+            <button onclick="digitar('4')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">4</button>
+            <button onclick="digitar('5')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">5</button>
+            
+            <button onclick="digitar('6')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">6</button>
+            <button onclick="digitar('7')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">7</button>
+            <button onclick="digitar('8')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">8</button>
+            
+            <button onclick="digitar('9')" class="h-24 bg-white border-2 border-zinc-900 rounded-2xl text-4xl font-bold active:bg-zinc-200 transition-colors shadow-md">9</button>
+            
+            <button class="col-span-2 h-24 bg-zinc-900 text-white rounded-2xl text-2xl font-black uppercase tracking-widest active:bg-zinc-700 shadow-lg">
+            ENTER
+            </button>
+            
+            <button onclick="limpar()" class="col-span-3 mt-2 text-zinc-500 font-bold uppercase text-sm tracking-widest">
+            Limpar Digitação
+            </button>
+
+        </div>
+
+    </main>
     
 
     <script src="script.js"></script>
 
     <script>
-        
+
         function atualizarHeader() {
         const agora = new Date();
         
@@ -41,6 +97,20 @@
         setInterval(atualizarHeader, 1000);
         // Execução imediata ao carregar
         atualizarHeader();
+
+        const inputCpf = document.getElementById('cpf-input');
+
+        function digitar(num) {
+            // Limita a 11 dígitos (CPF padrão)
+            if (inputCpf.value.length < 11) {
+            inputCpf.value += num;
+            // Aqui você poderia adicionar uma máscara de CPF automaticamente se desejar
+            }
+        }
+
+        function limpar() {
+            inputCpf.value = "";
+        }
 
     </script>
 
