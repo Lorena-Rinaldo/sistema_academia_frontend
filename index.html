@@ -56,25 +56,25 @@
 
         <div class="grid grid-cols-3 gap-6 w-full max-w-md">
     
-            <button onclick="digitar('1')" class="btn-num border-[#c5a059]">1</button>
-            <button onclick="digitar('2')" class="btn-num border-[#c5a059]">2</button>
-            <button onclick="digitar('3')" class="btn-num border-[#c5a059]">3</button>
+            <button onclick="digitar('1')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">1</button>
+            <button onclick="digitar('2')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">2</button>
+            <button onclick="digitar('3')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">3</button>
             
-            <button onclick="digitar('4')" class="btn-num border-[#c5a059]">4</button>
-            <button onclick="digitar('5')" class="btn-num border-[#c5a059]">5</button>
-            <button onclick="digitar('6')" class="btn-num border-[#c5a059]">6</button>
+            <button onclick="digitar('4')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">4</button>
+            <button onclick="digitar('5')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">5</button>
+            <button onclick="digitar('6')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">6</button>
             
-            <button onclick="digitar('7')" class="btn-num border-[#c5a059]">7</button>
-            <button onclick="digitar('8')" class="btn-num border-[#c5a059]">8</button>
-            <button onclick="digitar('9')" class="btn-num border-[#c5a059]">9</button>
+            <button onclick="digitar('7')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">7</button>
+            <button onclick="digitar('8')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">8</button>
+            <button onclick="digitar('9')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">9</button>
             
             <button onclick="limpar()" class="h-24 bg-red-900/10 border border-red-2100 text-red-500/50 rounded-2xl text-xl font-bold active:scale-95 transition-all"> AC </button>
 
-            <button onclick="digitar('0')" class="btn-num border-[#c5a059]">0</button>
+            <button onclick="digitar('0')" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all shadow-xl">0</button>
 
             <button onclick="apagarUltimo()" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all flex items-center justify-center"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg></button>
 
-            <button onclick="validarCpf()" class="col-span-3 h-20 mt-2 border-2 border-[#c5a059] bg-[#c5a059]/10 text-[#c5a059] rounded-2xl text-2xl font-black uppercase tracking-[0.2em]"> Confirmar Check-in</button>
+            <button onclick="validarCpf()" class="col-span-3 h-20 mt-2 bg-emerald-500/15 border-2 border-emerald-500 text-emerald-500 rounded-2xl text-2xl font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:bg-emerald-500/5 active:bg-emerald-500/2 transition-all"> Confirmar Check-in </button>
 
         </div>
 
@@ -89,15 +89,7 @@
         </div>
     </footer>
 
-    <style type="text/tailwindcss">
-        @layer components {
-            .btn-num {
-                /* Removido active:bg-[#c5a059] e active:text-black */
-                @apply h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-4xl font-light text-[#e5e5e5] 
-                active:border-[#c5a059] active:scale-95 transition-all shadow-xl;
-            }
-        }
-    </style>
+    <script src="script.js"></script>
 
     <script>
         function atualizarHeader() {
@@ -131,9 +123,9 @@
         }
 
         function apagarUltimo() {
-            const rawValue = inputCpf.value.replace(/\D/g, ''); // Pega só os números
-            const novoValor = rawValue.slice(0, -1); // Remove o último
-            inputCpf.value = formatarCPF(novoValor); // Formata de novo
+            const rawValue = inputCpf.value.replace(/\D/g, ''); 
+            const novoValor = rawValue.slice(0, -1); 
+            inputCpf.value = formatarCPF(novoValor); 
         }
         
     </script>
