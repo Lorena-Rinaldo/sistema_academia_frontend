@@ -74,7 +74,7 @@
 
             <button onclick="apagarUltimo()" class="h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl text-[#e5e5e5] active:border-[#c5a059] active:scale-95 transition-all flex items-center justify-center"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg></button>
 
-            <button onclick="validarCpf()" class="col-span-3 h-20 mt-2 bg-emerald-500/15 border-2 border-emerald-500 text-emerald-500 rounded-2xl text-2xl font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:bg-emerald-500/5 active:bg-emerald-500/2 transition-all"> Confirmar Check-in </button>
+            <button onclick="validarCPF()" class="col-span-3 h-20 mt-2 bg-emerald-500/15 border-2 border-emerald-500 text-emerald-500 rounded-2xl text-2xl font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:bg-emerald-500/5 active:bg-emerald-500/2 transition-all"> Confirmar Check-in </button>
 
         </div>
 
@@ -90,45 +90,6 @@
     </footer>
 
     <script src="script.js"></script>
-
-    <script>
-        function atualizarHeader() {
-            const agora = new Date();
-            document.getElementById('data').textContent = agora.toLocaleDateString('pt-BR');
-            document.getElementById('hora').textContent = agora.toLocaleTimeString('pt-BR');
-        }
-
-        setInterval(atualizarHeader, 1000);
-        atualizarHeader();
-
-        const inputCpf = document.getElementById('cpf-input');
-
-        function digitar(num) {
-            if (inputCpf.value.replace(/\D/g, '').length < 11) {
-                const rawValue = inputCpf.value.replace(/\D/g, '') + num;
-                inputCpf.value = formatarCPF(rawValue);
-            }
-        }
-
-        function limpar() {
-            inputCpf.value = "";
-        }
-
-        function formatarCPF(v) {
-            v = v.replace(/\D/g, "");
-            if (v.length <= 3) return v;
-            if (v.length <= 6) return v.replace(/(\d{3})(\d+)/, "$1.$2");
-            if (v.length <= 9) return v.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
-            return v.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, "$1.$2.$3-$4");
-        }
-
-        function apagarUltimo() {
-            const rawValue = inputCpf.value.replace(/\D/g, ''); 
-            const novoValor = rawValue.slice(0, -1); 
-            inputCpf.value = formatarCPF(novoValor); 
-        }
-        
-    </script>
 
 </body>
 </html>
