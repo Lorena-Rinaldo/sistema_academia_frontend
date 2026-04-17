@@ -77,7 +77,7 @@ async function validarCPF() {
             }, 2500);
         }
     } catch (error) {
-        exibirMensagemNoVisor("ERRO CONEXÃO", "erro");
+        exibirMensagemNoVisor("ERRO DE CONEXÃO", "erro");
         setTimeout(limpar, 4000);
     }
 }
