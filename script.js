@@ -48,6 +48,7 @@ async function validarCPF() {
 
     if (cpfLimpo.length !== 11) {
         exibirMensagemNoVisor("CPF INCOMPLETO", "erro");
+        setTimeout(limpar, 3000);
         return;
     }
 
@@ -58,32 +59,49 @@ async function validarCPF() {
         const respostaApi = await fetch(`https://sistema-academia-backend-hx4f.vercel.app/alunos/${cpfLimpo}`);
         const dados = await respostaApi.json();
 
-        if (respostaApi.ok) {
-            // Se liberado = true (BEM-VINDO), se false (ACESSO NEGADO)
-            const tipo = dados.liberado ? "sucesso" : "erro";
-            exibirMensagemNoVisor(dados.mensagem, tipo);
+        if (respostaApi.ok && dados.liberado) {
+            exibirMensagemNoVisor(dados.mensagem, "sucesso");
+            setTimeout(limpar, 4000);
         } else {
-            exibirMensagemNoVisor("NÃO ENCONTRADO", "erro");
+            exibirMensagemNoVisor(dados.mensagem || "ACESSO NEGADO", "erro", false);
+
+            setTimeout(() => {
+                exibirMensagemNoVisor("PASSAR NA SECRETARIA", "erro", true);
+
+                setTimeout(limpar, 6000);
+            }, 2000); 
         }
     } catch (error) {
         exibirMensagemNoVisor("ERRO CONEXÃO", "erro");
+        setTimeout(limpar, 3000);
     }
 }
 
 // Função para mostrar a mensagem no lugar do CPF
-function exibirMensagemNoVisor(msg, tipo) {
+function exibirMensagemNoVisor(msg, tipo, fontePequena = false) {
     inputCpf.value = msg;
 
-    // Remove cores padrão
+     if (fontePequena) {
+        inputCpf.classList.remove('text-5xl');
+        inputCpf.classList.add('text-2xl');
+    } 
+    else {
+        inputCpf.classList.remove('text-2xl');
+        inputCpf.classList.add('text-5xl');
+    }
+
     inputCpf.classList.remove('border-[#c5a059]', 'text-[#e5e5e5]');
 
     if (tipo === "sucesso") {
         inputCpf.classList.add('text-emerald-500', 'border-emerald-500');
-    } else {
+    } 
+    else if(tipo === "erro") {
         inputCpf.classList.add('text-red-500', 'border-red-500');
     }
+    else {
+        inputCpf.classList.add('text-[#e5e5e5]', 'border-[#c5a059]');
+    }
 
-    // Espera 3 segundos e reseta o visor para o próximo aluno
     setTimeout(() => {
         limpar();
     }, 3000);
