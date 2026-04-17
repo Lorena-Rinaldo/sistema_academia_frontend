@@ -25,8 +25,8 @@ function digitar(num) {
 // Limpa o valor para outro aluno digitar
 function limpar() {
     inputCpf.value = "";
-    inputCpf.classList.remove('text-emerald-500', 'border-emerald-500', 'text-red-500', 'border-red-500');
-    inputCpf.classList.add('text-[#e5e5e5]', 'border-[#c5a059]');
+    inputCpf.classList.remove('text-2xl', 'text-emerald-500', 'border-emerald-500', 'text-red-500', 'border-red-500');
+    inputCpf.classList.add('text-[#e5e5e5]', 'border-[#c5a059]', 'text-5xl');
 }
 
 function formatarCPF(v) {
@@ -56,24 +56,29 @@ async function validarCPF() {
         // Mostra um estado de "Carregando"
         inputCpf.value = "CONSULTANDO...";
 
-        const respostaApi = await fetch(`https://sistema-academia-backend-hx4f.vercel.app/alunos/${cpfLimpo}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+        const respostaApi = await fetch(`https://sistema-academia-backend-hx4f.vercel.app/alunos/${cpfLimpo}`, { signal: controller.signal });
         const dados = await respostaApi.json();
 
         if (respostaApi.ok && dados.liberado) {
             exibirMensagemNoVisor(dados.mensagem, "sucesso");
             setTimeout(limpar, 4000);
         } else {
-            exibirMensagemNoVisor(dados.mensagem || "ACESSO NEGADO", "erro", false);
+            const msgErro = dados.mensagem || dados.error || "ACESSO NEGADO";
+
+            exibirMensagemNoVisor(msgErro, "erro", false);
 
             setTimeout(() => {
                 exibirMensagemNoVisor("PASSAR NA SECRETARIA", "erro", true);
 
                 setTimeout(limpar, 6000);
-            }, 2000); 
+            }, 2500);
         }
     } catch (error) {
         exibirMensagemNoVisor("ERRO CONEXÃO", "erro");
-        setTimeout(limpar, 3000);
+        setTimeout(limpar, 4000);
     }
 }
 
@@ -81,10 +86,10 @@ async function validarCPF() {
 function exibirMensagemNoVisor(msg, tipo, fontePequena = false) {
     inputCpf.value = msg;
 
-     if (fontePequena) {
+    if (fontePequena) {
         inputCpf.classList.remove('text-5xl');
         inputCpf.classList.add('text-2xl');
-    } 
+    }
     else {
         inputCpf.classList.remove('text-2xl');
         inputCpf.classList.add('text-5xl');
@@ -94,16 +99,12 @@ function exibirMensagemNoVisor(msg, tipo, fontePequena = false) {
 
     if (tipo === "sucesso") {
         inputCpf.classList.add('text-emerald-500', 'border-emerald-500');
-    } 
-    else if(tipo === "erro") {
+    }
+    else if (tipo === "erro") {
         inputCpf.classList.add('text-red-500', 'border-red-500');
     }
     else {
         inputCpf.classList.add('text-[#e5e5e5]', 'border-[#c5a059]');
     }
-
-    setTimeout(() => {
-        limpar();
-    }, 3000);
 }
 
