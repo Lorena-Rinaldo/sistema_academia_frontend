@@ -1,3 +1,5 @@
+let podeDigitar = true;
+
 //  Chamando elemento(s) pelo id
 const inputCpf = document.getElementById('cpf-input')
 
@@ -12,6 +14,7 @@ atualizarHeader();
 
 // Função do teclado numérico
 function digitar(num) {
+     if (!podeDigitar) return; 
     if (isNaN(inputCpf.value.charAt(0)) && inputCpf.value !== "") {
         limpar();
     }
@@ -24,6 +27,8 @@ function digitar(num) {
 
 // Limpa o valor para outro aluno digitar
 function limpar() {
+    podeDigitar = true;
+    inputCpf.readOnly = false;
     inputCpf.value = "";
     inputCpf.classList.remove('text-2xl', 'text-emerald-500', 'border-emerald-500', 'text-red-500', 'border-red-500');
     inputCpf.classList.add('text-[#e5e5e5]', 'border-[#c5a059]', 'text-5xl');
@@ -38,6 +43,7 @@ function formatarCPF(v) {
 }
 
 function apagarUltimo() {
+     if (!podeDigitar) return; 
     const rawValue = inputCpf.value.replace(/\D/g, '');
     const novoValor = rawValue.slice(0, -1);
     inputCpf.value = formatarCPF(novoValor);
@@ -47,12 +53,15 @@ async function validarCPF() {
     const cpfLimpo = inputCpf.value.replace(/\D/g, '');
 
     if (cpfLimpo.length !== 11) {
+        podeDigitar = false;
         exibirMensagemNoVisor("CPF INCOMPLETO", "erro");
         setTimeout(limpar, 3000);
         return;
     }
 
     try {
+        podeDigitar = false;
+        inputCpf.readOnly = true;
         // Mostra um estado de "Carregando"
         inputCpf.value = "CONSULTANDO...";
 
