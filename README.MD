@@ -6,6 +6,8 @@
 
 O projeto é focado em front-end, com destaque para design, usabilidade e apresentação de dados em tempo real.
 
+- Vercel: https://sistema-academia-frontend-plum.vercel.app/
+
 ## Autoras
 
 - Isabelly Ferreira - https://github.com/isabelly-lima05
